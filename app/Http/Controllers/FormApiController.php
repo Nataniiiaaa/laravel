@@ -28,7 +28,9 @@ class FormApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form = new form();
+        $form->fill($request->all())->save();
+        return $form;
     }
 
     /**
@@ -36,7 +38,7 @@ class FormApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return form::find($id);
     }
 
     /**
@@ -52,7 +54,9 @@ class FormApiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $form = form::find($id);
+        $form->fill($request->all())->save();
+        return $form;
     }
 
     /**
@@ -60,6 +64,7 @@ class FormApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $form = form::find($id);
+        $form->delete();
     }
 }
