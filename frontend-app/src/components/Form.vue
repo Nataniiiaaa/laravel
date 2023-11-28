@@ -29,10 +29,10 @@ export default {
     methods: {
         loadAllForm() {
             var url = `http://127.0.0.1:8000/api/form`;
-            axios.get(url).then();
-            ({ data }) => {
+            axios.get(url).then(({ data }) => {
                 console.log(data);
-            };
+                this.allForm = data;
+            });
         },
     },
 };
