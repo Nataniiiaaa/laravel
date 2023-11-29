@@ -13,13 +13,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(form, index) in allform" :key="form.id">
-                    <td>{{ form.id }}</td>
-                    <td>{{ form.nama }}</td>
-                    <td>{{ form.alamat }}</td>
-                    <td>{{ form.telepon }}</td>
-                    <td>{{ form.gender }}</td>
-                    <td></td>
+                <tr v-for="(Form, index) in allForm" :key="Form.id">
+                    <td>{{ Form.id }}</td>
+                    <td>{{ Form.nama }}</td>
+                    <td>{{ Form.alamat }}</td>
+                    <td>{{ Form.telepon }}</td>
+                    <td>{{ Form.gender }}</td>
+                    <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning" @click="edit(Form)">Edit</button>
+                            <button type="button" class="btn btn-danger" @click="remove(Form)">Delete</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -33,8 +38,8 @@ export default {
     name: "form",
     data() {
         return {
-            allform: {},
-            form: {
+            allForm: {},
+            Form: {
                 id: "",
                 nama: "",
                 alamat: "",
