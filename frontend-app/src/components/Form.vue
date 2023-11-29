@@ -63,6 +63,24 @@ export default {
                 this.allForm = data;
             });
         },
+        remove(Form){
+            var url = `http://127.0.0.1:8000/api/form/${Form.id}`;
+            axios.delete(url).then(
+                ()=>{
+                    console.log('Data Berhasil Dihapus!');
+                    this.allForm = data;
+                }
+            );
+        },
+        edit(Form){
+            var url = `http://127.0.0.1:8000/api/form/${Form.id}`;
+            axios.get(url).then(
+                ({data})=>{
+                    this.Form = data;
+                    console.log(this.Form);
+                }
+            );
+        }
     },
 };
 </script>
