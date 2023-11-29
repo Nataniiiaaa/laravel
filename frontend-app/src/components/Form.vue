@@ -1,5 +1,33 @@
 <template>
     <div class="container">
+        <h2>Form</h2>
+        <form @submit.prevent="simpan()">
+            <div class="mb-3 form-group">
+                <label>Nama</label>
+                <input type="text" class="form-control" v-model="Form.nama">
+            </div>
+            <div class="mb-3 form-group">
+                <label>Alamat</label>
+                <input type="text" class="form-control" v-model="Form.alamat">
+            </div>
+            <div class="mb-3 form-group">
+                <label>Telepon</label>
+                <input type="text" class="form-control" v-model="Form.telepon">
+            </div>
+            <div class="mb-3 form-group">
+                <label>Gender</label>
+                <select v-model="Form.gender" class="form-control">
+                    <option value="Pria">Pria</option>
+                    <option value="Wanita">Wanita</option>
+                </select>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" type="submit">Simpan</button>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-warning" @click="clear()">Clear</button>
+            </div>
+        </form>
         <h2>Data Form</h2>
         <table class="table table-striped">
             <thead>
@@ -80,6 +108,36 @@ export default {
                     console.log(this.Form);
                 }
             );
+        },
+        simpan(){
+            if(this.Form.id==''){
+                //simpan baru
+                var url = `http://127.0.0.1:8000/api/form`;
+                axios.post(url, this.Form).then(
+                    ()=>{
+                    console.log('Data Berhasil Disimpan!');
+                    this.loadAllForm();
+                    this.clear();
+                }
+            );
+            }else{
+                var url = `http://127.0.0.1:8000/api/form/${this.Form.id}`;
+            axios.put(url, this.Form).then(
+                ()=>{
+                    console.log('Data Berhasil Diedit!');
+                    this.loadAllForm();
+                    this.clear();
+                }
+            );
+        }
+
+        },
+        clear(){
+            this.Form.id='',
+            this.Form.nama='',
+            this.Form.alamat='',
+            this.Form.telepon='',
+            this.Form.gender='';
         }
     },
 };
